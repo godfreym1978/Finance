@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh "docker run -d --name 'tomcat:secure' "
+                sh "docker run -d -p 8888:8080  tomcat:secure "
                 echo 'Building..'
             }
         }
