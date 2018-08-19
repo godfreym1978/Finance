@@ -18,16 +18,16 @@ Connection conn = null;
 Statement statement = null;
 String oldMF = new String();
 String newMF = new String();
-double buyMF =0.0;
-double buyMFVal =0.0;
-double sellMF =0.0;
-double sellMFVal =0.0;
-double divMF =0.0;
-double divMFVal =0.0;
-double reinvMF =0.0;
-double reinvMFVal =0.0;
-double cashMF =0.0;
-double cashMFVal =0.0;
+float buyMF =0;
+float buyMFVal =0;
+float sellMF =0;
+float sellMFVal =0;
+float divMF =0;
+float divMFVal =0;
+float reinvMF =0;
+float reinvMFVal =0;
+float cashMF =0;
+float cashMFVal =0;
 
 boolean firstRec = true;
 
@@ -61,17 +61,17 @@ while(rs.next()){
 		firstRec = false;
 		oldMF = rs.getString("FMT_MF");
 		if(rs.getString("FMT_TRAN").equals("BUY")){
-			buyMF = buyMF + rs.getDouble("FMT_QTY");
-			buyMFVal = buyMFVal + rs.getDouble("FMT_VALUE");
+			buyMF = buyMF + rs.getFloat("FMT_QTY");
+			buyMFVal = buyMFVal + rs.getFloat("FMT_VALUE");
 		}else if(rs.getString("FMT_TRAN").equals("SELL")){
-			sellMF = sellMF + rs.getDouble("FMT_QTY");
-			sellMFVal = sellMFVal + rs.getDouble("FMT_VALUE");
+			sellMF = sellMF + rs.getFloat("FMT_QTY");
+			sellMFVal = sellMFVal + rs.getFloat("FMT_VALUE");
 		}else if(rs.getString("FMT_TRAN").indexOf("REINV")>0){
-			reinvMF = reinvMF + rs.getDouble("FMT_QTY");
-			reinvMFVal = reinvMFVal + rs.getDouble("FMT_VALUE");
+			reinvMF = reinvMF + rs.getFloat("FMT_QTY");
+			reinvMFVal = reinvMFVal + rs.getFloat("FMT_VALUE");
 		}else if(rs.getString("FMT_TRAN").indexOf("CASH")>0){
-			cashMF = cashMF + rs.getDouble("FMT_QTY");
-			cashMFVal = cashMFVal + rs.getDouble("FMT_VALUE");
+			cashMF = cashMF + rs.getFloat("FMT_QTY");
+			cashMFVal = cashMFVal + rs.getFloat("FMT_VALUE");
 		}	
 
 		%>
@@ -79,10 +79,10 @@ while(rs.next()){
 		<td><%=rs.getString("FMT_MF") %></td>
 		<td><%=rs.getDate("FMT_TRADE_DT") %></td>
 		<td><%=rs.getString("FMT_TRAN") %></td>
-		<td><%=rs.getDouble("FMT_VALUE") %></td>
-		<td><%=rs.getDouble("FMT_PRICE") %></td>
-		<td><%=rs.getDouble("FMT_QTY") %></td>
-		<td><%=rs.getDouble("FMT_BAL") %></td>
+		<td><%=rs.getFloat("FMT_VALUE") %></td>
+		<td><%=rs.getFloat("FMT_PRICE") %></td>
+		<td><%=rs.getFloat("FMT_QTY") %></td>
+		<td><%=rs.getFloat("FMT_BAL") %></td>
 		</tr>
 		<%
 	}else{
@@ -91,17 +91,17 @@ while(rs.next()){
 		if(oldMF.equals(newMF)){
 			oldMF = newMF;
 			if(rs.getString("FMT_TRAN").equals("BUY")){
-				buyMF = buyMF + rs.getDouble("FMT_QTY");
-				buyMFVal = buyMFVal + rs.getDouble("FMT_VALUE");
+				buyMF = buyMF + rs.getFloat("FMT_QTY");
+				buyMFVal = buyMFVal + rs.getFloat("FMT_VALUE");
 			}else if(rs.getString("FMT_TRAN").equals("SELL")){
-				sellMF = sellMF + rs.getDouble("FMT_QTY");
-				sellMFVal = sellMFVal + rs.getDouble("FMT_VALUE");
+				sellMF = sellMF + rs.getFloat("FMT_QTY");
+				sellMFVal = sellMFVal + rs.getFloat("FMT_VALUE");
 			}else if(rs.getString("FMT_TRAN").indexOf("REINV")>0){
-				reinvMF = reinvMF + rs.getDouble("FMT_QTY");
-				reinvMFVal = reinvMFVal + rs.getDouble("FMT_VALUE");
+				reinvMF = reinvMF + rs.getFloat("FMT_QTY");
+				reinvMFVal = reinvMFVal + rs.getFloat("FMT_VALUE");
 			}else if(rs.getString("FMT_TRAN").indexOf("CASH")>0){
-				cashMF = cashMF + rs.getDouble("FMT_QTY");
-				cashMFVal = cashMFVal + rs.getDouble("FMT_VALUE");
+				cashMF = cashMF + rs.getFloat("FMT_QTY");
+				cashMFVal = cashMFVal + rs.getFloat("FMT_VALUE");
 			}	
 
 			%>
@@ -109,44 +109,48 @@ while(rs.next()){
 			<td><%=rs.getString("FMT_MF") %></td>
 			<td><%=rs.getDate("FMT_TRADE_DT") %></td>
 			<td><%=rs.getString("FMT_TRAN") %></td>
-			<td><%=rs.getDouble("FMT_VALUE") %></td>
-			<td><%=rs.getDouble("FMT_PRICE") %></td>
-			<td><%=rs.getDouble("FMT_QTY") %></td>
-			<td><%=rs.getDouble("FMT_BAL") %></td>
+			<td><%=rs.getFloat("FMT_VALUE") %></td>
+			<td><%=rs.getFloat("FMT_PRICE") %></td>
+			<td><%=rs.getFloat("FMT_QTY") %></td>
+			<td><%=rs.getFloat("FMT_BAL") %></td>
 			</tr>
 			<%
 		}else{
 			%>
 			<tr>
-			<th colspan="7">Buy Qty - <%=buyMF%> / Buy Cost Value - $<%=buyMFVal%> |
+			<th colspan="7">
+			<b>
+			Buy Qty - <%=buyMF%> / Buy Cost Value - $<%=buyMFVal%> |
 			Sell Qty - <%=sellMF%> / Sell Cost Value - $<%=sellMFVal%> |
 			ReInv Qty - <%=reinvMF%> / ReInv Value - $<%=reinvMFVal%> |
-			Div Cash - $<%=cashMFVal%></th>
+			Div Cash - $<%=cashMFVal%>
+			</b>
+			</th>
 			</tr>
 			<%
 			oldMF = newMF;
 			
-			buyMF =0.0;
-			buyMFVal =0.0;
-			sellMF =0.0;
-			sellMFVal =0.0;
-			reinvMF =0.0;
-			reinvMFVal =0.0;
-			cashMF =0.0;
-			cashMFVal =0.0;
+			buyMF =0;
+			buyMFVal =0;
+			sellMF =0;
+			sellMFVal =0;
+			reinvMF =0;
+			reinvMFVal =0;
+			cashMF =0;
+			cashMFVal =0;
 
 			if(rs.getString("FMT_TRAN").equals("BUY")){
-				buyMF = buyMF + rs.getDouble("FMT_QTY");
-				buyMFVal = buyMFVal + rs.getDouble("FMT_VALUE");
+				buyMF = buyMF + rs.getFloat("FMT_QTY");
+				buyMFVal = buyMFVal + rs.getFloat("FMT_VALUE");
 			}else if(rs.getString("FMT_TRAN").equals("SELL")){
-				sellMF = sellMF + rs.getDouble("FMT_QTY");
-				sellMFVal = sellMFVal + rs.getDouble("FMT_VALUE");
+				sellMF = sellMF + rs.getFloat("FMT_QTY");
+				sellMFVal = sellMFVal + rs.getFloat("FMT_VALUE");
 			}else if(rs.getString("FMT_TRAN").indexOf("REINV")>0){
-				reinvMF = reinvMF + rs.getDouble("FMT_QTY");
-				reinvMFVal = reinvMFVal + rs.getDouble("FMT_VALUE");
+				reinvMF = reinvMF + rs.getFloat("FMT_QTY");
+				reinvMFVal = reinvMFVal + rs.getFloat("FMT_VALUE");
 			}else if(rs.getString("FMT_TRAN").indexOf("CASH")>0){
-				cashMF = cashMF + rs.getDouble("FMT_QTY");
-				cashMFVal = cashMFVal + rs.getDouble("FMT_VALUE");
+				cashMF = cashMF + rs.getFloat("FMT_QTY");
+				cashMFVal = cashMFVal + rs.getFloat("FMT_VALUE");
 			}	
 
 			%>
@@ -154,10 +158,10 @@ while(rs.next()){
 			<td><%=rs.getString("FMT_MF") %></td>
 			<td><%=rs.getDate("FMT_TRADE_DT") %></td>
 			<td><%=rs.getString("FMT_TRAN") %></td>
-			<td><%=rs.getDouble("FMT_VALUE") %></td>
-			<td><%=rs.getDouble("FMT_PRICE") %></td>
-			<td><%=rs.getDouble("FMT_QTY") %></td>
-			<td><%=rs.getDouble("FMT_BAL") %></td>
+			<td><%=rs.getFloat("FMT_VALUE") %></td>
+			<td><%=rs.getFloat("FMT_PRICE") %></td>
+			<td><%=rs.getFloat("FMT_QTY") %></td>
+			<td><%=rs.getFloat("FMT_BAL") %></td>
 			</tr>
 			<%
 
@@ -168,10 +172,14 @@ while(rs.next()){
 }
 			%>
 			<tr>
-			<th colspan="7">Buy Qty - <%=buyMF%> / Buy Cost Value - $<%=buyMFVal%> |
+			<th colspan="7">
+			<b>
+			Buy Qty - <%=buyMF%> / Buy Cost Value - $<%=buyMFVal%> |
 			Sell Qty - <%=sellMF%> / Sell Cost Value - $<%=sellMFVal%> |
 			ReInv Qty - <%=reinvMF%> / ReInv Value - $<%=reinvMFVal%> |
-			Div Cash - $<%=cashMFVal%></th>
+			Div Cash - $<%=cashMFVal%>
+			</b>
+			</th>
 			</tr>
 
 			<%

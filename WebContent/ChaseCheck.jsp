@@ -16,10 +16,10 @@
 <%
 Connection conn = null;
 Statement statement = null;
-double oldDep =0.0;
-double oldWith =0.0;
-double newDep =0.0;
-double newWith =0.0;
+float oldDep =0;
+float oldWith =0;
+float newDep =0;
+float newWith =0;
 boolean firstRec = true;
 int oldMonth = 0;
 int newMonth = 0;
@@ -49,31 +49,31 @@ while(rs.next()){
 	
 	if(firstRec){
 		firstRec = false;
-		oldDep = rs.getDouble("CBC_DEPOSIT");
-		oldWith = rs.getDouble("CBC_WITH");
+		oldDep = rs.getFloat("CBC_DEPOSIT");
+		oldWith = rs.getFloat("CBC_WITH");
 		oldMonth = rs.getDate("CBC_DATE").getMonth(); 
 		%>
 		<tr>
 		<td><%=rs.getDate("CBC_DATE") %></td>
 		<td><%=rs.getString("CBC_DESC") %></td>
-		<td><%=rs.getDouble("CBC_DEPOSIT") %></td>
-		<td><%=rs.getDouble("CBC_WITH") %></td>
-		<td><%=rs.getDouble("CBC_BAL") %></td>
+		<td><%=rs.getFloat("CBC_DEPOSIT") %></td>
+		<td><%=rs.getFloat("CBC_WITH") %></td>
+		<td><%=rs.getFloat("CBC_BAL") %></td>
 		</tr>
 		<%
 	}else{
 		newMonth = rs.getDate("CBC_DATE").getMonth();
 		if(oldMonth==newMonth){
-			oldDep = oldDep+rs.getDouble("CBC_DEPOSIT");
-			oldWith = oldWith+rs.getDouble("CBC_WITH");
+			oldDep = oldDep+rs.getFloat("CBC_DEPOSIT");
+			oldWith = oldWith+rs.getFloat("CBC_WITH");
 			//oldMonth = rs.getDate("CBC_DATE").getMonth(); 
 			%>
 			<tr>
 			<td><%=rs.getDate("CBC_DATE") %></td>
 			<td><%=rs.getString("CBC_DESC") %></td>
-			<td><%=rs.getDouble("CBC_DEPOSIT") %></td>
-			<td><%=rs.getDouble("CBC_WITH") %></td>
-			<td><%=rs.getDouble("CBC_BAL") %></td>
+			<td><%=rs.getFloat("CBC_DEPOSIT") %></td>
+			<td><%=rs.getFloat("CBC_WITH") %></td>
+			<td><%=rs.getFloat("CBC_BAL") %></td>
 			</tr>
 			<%
 		}else{
@@ -86,16 +86,16 @@ while(rs.next()){
 			<th></th>
 			</tr>
 			<%
-			oldDep = rs.getDouble("CBC_DEPOSIT");
-			oldWith = rs.getDouble("CBC_WITH");
+			oldDep = rs.getFloat("CBC_DEPOSIT");
+			oldWith = rs.getFloat("CBC_WITH");
 			oldMonth = rs.getDate("CBC_DATE").getMonth(); 
 			%>
 			<tr>
 			<td><%=rs.getDate("CBC_DATE") %></td>
 			<td><%=rs.getString("CBC_DESC") %></td>
-			<td><%=rs.getDouble("CBC_DEPOSIT") %></td>
-			<td><%=rs.getDouble("CBC_WITH") %></td>
-			<td><%=rs.getDouble("CBC_BAL") %></td>
+			<td><%=rs.getFloat("CBC_DEPOSIT") %></td>
+			<td><%=rs.getFloat("CBC_WITH") %></td>
+			<td><%=rs.getFloat("CBC_BAL") %></td>
 			</tr>
 			<%
 

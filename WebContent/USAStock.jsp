@@ -18,13 +18,13 @@ Connection conn = null;
 Statement statement = null;
 String oldMF = new String();
 String newMF = new String();
-double buyMF =0.0;
-double buyMFVal =0.0;
-double sellMF =0.0;
-double sellMFVal =0.0;
-double divMF =0.0;
-double divMFVal =0.0;
-double commission = 0.0;
+float buyMF =0;
+float buyMFVal =0;
+float sellMF =0;
+float sellMFVal =0;
+float divMF =0;
+float divMFVal =0;
+float commission = 0;
 boolean firstRec = true;
 
 
@@ -56,16 +56,16 @@ while(rs.next()){
 		firstRec = false;
 		oldMF = rs.getString("UST_TICK");
 		if(rs.getString("UST_TRAN").equals("BUY")){
-			buyMF = buyMF + rs.getDouble("UST_QTY");
-			buyMFVal = buyMFVal + rs.getDouble("UST_PRICE")*rs.getDouble("UST_QTY");
-			commission = commission + rs.getDouble("UST_COMMISION"); 
+			buyMF = buyMF + rs.getFloat("UST_QTY");
+			buyMFVal = buyMFVal + rs.getFloat("UST_PRICE")*rs.getFloat("UST_QTY");
+			commission = commission + rs.getFloat("UST_COMMISION"); 
 		}else if(rs.getString("UST_TRAN").equals("SELL")){
-			sellMF = sellMF + rs.getDouble("UST_QTY");
-			sellMFVal = sellMFVal + rs.getDouble("UST_PRICE")*rs.getDouble("UST_QTY");
-			commission = commission + rs.getDouble("UST_COMMISION");
+			sellMF = sellMF + rs.getFloat("UST_QTY");
+			sellMFVal = sellMFVal + rs.getFloat("UST_PRICE")*rs.getFloat("UST_QTY");
+			commission = commission + rs.getFloat("UST_COMMISION");
 		}else{
-			divMF = divMF + rs.getDouble("UST_QTY");
-			divMFVal = divMFVal + rs.getDouble("UST_PRICE")*rs.getDouble("UST_QTY");
+			divMF = divMF + rs.getFloat("UST_QTY");
+			divMFVal = divMFVal + rs.getFloat("UST_PRICE")*rs.getFloat("UST_QTY");
 		}
 		%>
 		<tr>
@@ -73,9 +73,9 @@ while(rs.next()){
 		<td><%=rs.getString("UST_NAME") %></td>
 		<td><%=rs.getString("UST_TRAN") %></td>
 		<td><%=rs.getDate("UST_DATE") %></td>
-		<td><%=rs.getDouble("UST_QTY") %></td>
-		<td><%=rs.getDouble("UST_PRICE") %></td>
-		<td><%=rs.getDouble("UST_COMMISION") %></td>
+		<td><%=rs.getFloat("UST_QTY") %></td>
+		<td><%=rs.getFloat("UST_PRICE") %></td>
+		<td><%=rs.getFloat("UST_COMMISION") %></td>
 		</tr>
 		<%
 	}else{
@@ -84,16 +84,16 @@ while(rs.next()){
 		if(oldMF.equals(newMF)){
 			oldMF = newMF;
 			if(rs.getString("UST_TRAN").equals("BUY")){
-				buyMF = buyMF + rs.getDouble("UST_QTY");
-				buyMFVal = buyMFVal + rs.getDouble("UST_PRICE")*rs.getDouble("UST_QTY");
-				commission = commission + rs.getDouble("UST_COMMISION");
+				buyMF = buyMF + rs.getFloat("UST_QTY");
+				buyMFVal = buyMFVal + rs.getFloat("UST_PRICE")*rs.getFloat("UST_QTY");
+				commission = commission + rs.getFloat("UST_COMMISION");
 			}else if(rs.getString("UST_TRAN").equals("SELL")){
-				sellMF = sellMF + rs.getDouble("UST_QTY");
-				sellMFVal = sellMFVal + rs.getDouble("UST_PRICE")*rs.getDouble("UST_QTY");
-				commission = commission + rs.getDouble("UST_COMMISION");
+				sellMF = sellMF + rs.getFloat("UST_QTY");
+				sellMFVal = sellMFVal + rs.getFloat("UST_PRICE")*rs.getFloat("UST_QTY");
+				commission = commission + rs.getFloat("UST_COMMISION");
 			}else{
-				divMF = divMF + rs.getDouble("UST_QTY");
-				divMFVal = divMFVal + rs.getDouble("UST_PRICE")*rs.getDouble("UST_QTY");
+				divMF = divMF + rs.getFloat("UST_QTY");
+				divMFVal = divMFVal + rs.getFloat("UST_PRICE")*rs.getFloat("UST_QTY");
 			}
 			%>
 		<tr>
@@ -101,9 +101,9 @@ while(rs.next()){
 		<td><%=rs.getString("UST_NAME") %></td>
 		<td><%=rs.getString("UST_TRAN") %></td>
 		<td><%=rs.getDate("UST_DATE") %></td>
-		<td><%=rs.getDouble("UST_QTY") %></td>
-		<td><%=rs.getDouble("UST_PRICE") %></td>
-		<td><%=rs.getDouble("UST_COMMISION") %></td>
+		<td><%=rs.getFloat("UST_QTY") %></td>
+		<td><%=rs.getFloat("UST_PRICE") %></td>
+		<td><%=rs.getFloat("UST_COMMISION") %></td>
 		</tr>
 
 			<%
@@ -115,26 +115,26 @@ while(rs.next()){
 			<%
 			oldMF = newMF;
 			
-			buyMF =0.0;
-			buyMFVal =0.0;
-			sellMF =0.0;
-			sellMFVal =0.0;
-			divMF =0.0;
-			divMFVal =0.0;
-			commission = 0.0;
+			buyMF =0;
+			buyMFVal =0;
+			sellMF =0;
+			sellMFVal =0;
+			divMF =0;
+			divMFVal =0;
+			commission = 0;
 
 			
 			if(rs.getString("UST_TRAN").equals("BUY")){
-				buyMF = buyMF + rs.getDouble("UST_QTY");
-				buyMFVal = buyMFVal + rs.getDouble("UST_PRICE")*rs.getDouble("UST_QTY");
-				commission = commission + rs.getDouble("UST_COMMISION"); 
+				buyMF = buyMF + rs.getFloat("UST_QTY");
+				buyMFVal = buyMFVal + rs.getFloat("UST_PRICE")*rs.getFloat("UST_QTY");
+				commission = commission + rs.getFloat("UST_COMMISION"); 
 			}else if(rs.getString("UST_TRAN").equals("SELL")){
-				sellMF = sellMF + rs.getDouble("UST_QTY");
-				sellMFVal = sellMFVal + rs.getDouble("UST_PRICE")*rs.getDouble("UST_QTY");
-				commission = commission + rs.getDouble("UST_COMMISION"); 
+				sellMF = sellMF + rs.getFloat("UST_QTY");
+				sellMFVal = sellMFVal + rs.getFloat("UST_PRICE")*rs.getFloat("UST_QTY");
+				commission = commission + rs.getFloat("UST_COMMISION"); 
 			}else{
-				divMF = divMF + rs.getDouble("UST_QTY");
-				divMFVal = divMFVal + rs.getDouble("UST_PRICE")*rs.getDouble("UST_QTY");
+				divMF = divMF + rs.getFloat("UST_QTY");
+				divMFVal = divMFVal + rs.getFloat("UST_PRICE")*rs.getFloat("UST_QTY");
 			}
 			%>
 		<tr>
@@ -142,9 +142,9 @@ while(rs.next()){
 		<td><%=rs.getString("UST_NAME") %></td>
 		<td><%=rs.getString("UST_TRAN") %></td>
 		<td><%=rs.getDate("UST_DATE") %></td>
-		<td><%=rs.getDouble("UST_QTY") %></td>
-		<td><%=rs.getDouble("UST_PRICE") %></td>
-		<td><%=rs.getDouble("UST_COMMISION") %></td>
+		<td><%=rs.getFloat("UST_QTY") %></td>
+		<td><%=rs.getFloat("UST_PRICE") %></td>
+		<td><%=rs.getFloat("UST_COMMISION") %></td>
 		</tr>
 
 			<%

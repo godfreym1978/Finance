@@ -16,10 +16,10 @@
 <%
 Connection conn = null;
 Statement statement = null;
-double oldDep =0.0;
-double oldWith =0.0;
-double newDep =0.0;
-double newWith =0.0;
+float oldDep =0;
+float oldWith =0;
+float newDep =0;
+float newWith =0;
 boolean firstRec = true;
 int oldMonth = 0;
 int newMonth = 0;
@@ -48,29 +48,29 @@ while(rs.next()){
 	
 	if(firstRec){
 		firstRec = false;
-		oldDep = rs.getDouble("A61001_DEPOSIT");
-		oldWith = rs.getDouble("A61001_WITH");
+		oldDep = rs.getFloat("A61001_DEPOSIT");
+		oldWith = rs.getFloat("A61001_WITH");
 		oldMonth = rs.getDate("A61001_DATE").getMonth(); 
 		%>
 		<tr>
 		<td><%=rs.getDate("A61001_DATE") %></td>
 		<td><%=rs.getString("A61001_DESC") %></td>
-		<td><%=rs.getDouble("A61001_DEPOSIT") %></td>
-		<td><%=rs.getDouble("A61001_WITH") %></td>
+		<td><%=rs.getFloat("A61001_DEPOSIT") %></td>
+		<td><%=rs.getFloat("A61001_WITH") %></td>
 		</tr>
 		<%
 	}else{
 		newMonth = rs.getDate("A61001_DATE").getMonth();
 		if(oldMonth==newMonth){
-			oldDep = oldDep+rs.getDouble("A61001_DEPOSIT");
-			oldWith = oldWith+rs.getDouble("A61001_WITH");
+			oldDep = oldDep+rs.getFloat("A61001_DEPOSIT");
+			oldWith = oldWith+rs.getFloat("A61001_WITH");
 			//oldMonth = rs.getDate("A61001_DATE").getMonth(); 
 			%>
 			<tr>
 			<td><%=rs.getDate("A61001_DATE") %></td>
 			<td><%=rs.getString("A61001_DESC") %></td>
-			<td><%=rs.getDouble("A61001_DEPOSIT") %></td>
-			<td><%=rs.getDouble("A61001_WITH") %></td>
+			<td><%=rs.getFloat("A61001_DEPOSIT") %></td>
+			<td><%=rs.getFloat("A61001_WITH") %></td>
 			</tr>
 			<%
 		}else{
@@ -82,15 +82,15 @@ while(rs.next()){
 			<th><%=oldWith%></th>
 			</tr>
 			<%
-			oldDep = rs.getDouble("A61001_DEPOSIT");
-			oldWith = rs.getDouble("A61001_WITH");
+			oldDep = rs.getFloat("A61001_DEPOSIT");
+			oldWith = rs.getFloat("A61001_WITH");
 			oldMonth = rs.getDate("A61001_DATE").getMonth(); 
 			%>
 			<tr>
 			<td><%=rs.getDate("A61001_DATE") %></td>
 			<td><%=rs.getString("A61001_DESC") %></td>
-			<td><%=rs.getDouble("A61001_DEPOSIT") %></td>
-			<td><%=rs.getDouble("A61001_WITH") %></td>
+			<td><%=rs.getFloat("A61001_DEPOSIT") %></td>
+			<td><%=rs.getFloat("A61001_WITH") %></td>
 			</tr>
 			<%
 

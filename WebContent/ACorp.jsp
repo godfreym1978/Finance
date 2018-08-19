@@ -16,10 +16,10 @@
 <%
 Connection conn = null;
 Statement statement = null;
-double oldDep =0.0;
-double oldWith =0.0;
-double newDep =0.0;
-double newWith =0.0;
+float oldDep =0;
+float oldWith =0;
+float newDep =0;
+float newWith =0;
 boolean firstRec = true;
 int oldMonth = 0;
 int newMonth = 0;
@@ -48,29 +48,29 @@ while(rs.next()){
 	
 	if(firstRec){
 		firstRec = false;
-		oldDep = rs.getDouble("ACORP_DEPOSIT");
-		oldWith = rs.getDouble("ACORP_WITH");
+		oldDep = rs.getFloat("ACORP_DEPOSIT");
+		oldWith = rs.getFloat("ACORP_WITH");
 		oldMonth = rs.getDate("ACORP_DATE").getMonth(); 
 		%>
 		<tr>
 		<td><%=rs.getDate("ACORP_DATE") %></td>
 		<td><%=rs.getString("ACORP_DESC") %></td>
-		<td><%=rs.getDouble("ACORP_DEPOSIT") %></td>
-		<td><%=rs.getDouble("ACORP_WITH") %></td>
+		<td><%=rs.getFloat("ACORP_DEPOSIT") %></td>
+		<td><%=rs.getFloat("ACORP_WITH") %></td>
 		</tr>
 		<%
 	}else{
 		newMonth = rs.getDate("ACORP_DATE").getMonth();
 		if(oldMonth==newMonth){
-			oldDep = oldDep+rs.getDouble("ACORP_DEPOSIT");
-			oldWith = oldWith+rs.getDouble("ACORP_WITH");
+			oldDep = oldDep+rs.getFloat("ACORP_DEPOSIT");
+			oldWith = oldWith+rs.getFloat("ACORP_WITH");
 			//oldMonth = rs.getDate("ACORP_DATE").getMonth(); 
 			%>
 			<tr>
 			<td><%=rs.getDate("ACORP_DATE") %></td>
 			<td><%=rs.getString("ACORP_DESC") %></td>
-			<td><%=rs.getDouble("ACORP_DEPOSIT") %></td>
-			<td><%=rs.getDouble("ACORP_WITH") %></td>
+			<td><%=rs.getFloat("ACORP_DEPOSIT") %></td>
+			<td><%=rs.getFloat("ACORP_WITH") %></td>
 			</tr>
 			<%
 		}else{
@@ -82,15 +82,15 @@ while(rs.next()){
 			<th><%=oldWith%></th>
 			</tr>
 			<%
-			oldDep = rs.getDouble("ACORP_DEPOSIT");
-			oldWith = rs.getDouble("ACORP_WITH");
+			oldDep = rs.getFloat("ACORP_DEPOSIT");
+			oldWith = rs.getFloat("ACORP_WITH");
 			oldMonth = rs.getDate("ACORP_DATE").getMonth(); 
 			%>
 			<tr>
 			<td><%=rs.getDate("ACORP_DATE") %></td>
 			<td><%=rs.getString("ACORP_DESC") %></td>
-			<td><%=rs.getDouble("ACORP_DEPOSIT") %></td>
-			<td><%=rs.getDouble("ACORP_WITH") %></td>
+			<td><%=rs.getFloat("ACORP_DEPOSIT") %></td>
+			<td><%=rs.getFloat("ACORP_WITH") %></td>
 			</tr>
 			<%
 

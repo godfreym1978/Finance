@@ -18,10 +18,10 @@ Connection conn = null;
 Statement statement = null;
 String oldMF = new String();
 String newMF = new String();
-double buyMF =0.0;
-double buyMFVal =0.0;
-double sellMF =0.0;
-double sellMFVal =0.0;
+float buyMF =0;
+float buyMFVal =0;
+float sellMF =0;
+float sellMFVal =0;
 
 boolean firstRec = true;
 
@@ -57,22 +57,22 @@ while(rs.next()){
 		firstRec = false;
 		oldMF = rs.getString("MFI_MF_NAME");
 		if(rs.getString("MFI_TRAN").equals("BUY")){
-			buyMF = buyMF + rs.getDouble("MFI_TRAN_QTY");
-			buyMFVal = buyMFVal + rs.getDouble("MFI_AMT");
+			buyMF = buyMF + rs.getFloat("MFI_TRAN_QTY");
+			buyMFVal = buyMFVal + rs.getFloat("MFI_AMT");
 		}else{
-			sellMF = sellMF + rs.getDouble("MFI_TRAN_QTY");
-			sellMFVal = sellMFVal + rs.getDouble("MFI_AMT");
+			sellMF = sellMF + rs.getFloat("MFI_TRAN_QTY");
+			sellMFVal = sellMFVal + rs.getFloat("MFI_AMT");
 		}
 		%>
 		<tr>
 		<td><%=rs.getString("MFI_MF_NAME") %></td>
 		<td><%=rs.getDate("MFI_TRAN_DATE") %></td>
 		<td><%=rs.getString("MFI_TRAN") %></td>
-		<td><%=rs.getDouble("MFI_AMT") %></td>
-		<td><%=rs.getDouble("MFI_PUB_NAV") %></td>
-		<td><%=rs.getDouble("MFI_TRAN_NAV") %></td>
-		<td><%=rs.getDouble("MFI_TRAN_QTY") %></td>
-		<td><%=rs.getDouble("MFI_BAL_QTY") %></td>
+		<td><%=rs.getFloat("MFI_AMT") %></td>
+		<td><%=rs.getFloat("MFI_PUB_NAV") %></td>
+		<td><%=rs.getFloat("MFI_TRAN_NAV") %></td>
+		<td><%=rs.getFloat("MFI_TRAN_QTY") %></td>
+		<td><%=rs.getFloat("MFI_BAL_QTY") %></td>
 		</tr>
 		<%
 	}else{
@@ -81,22 +81,22 @@ while(rs.next()){
 		if(oldMF.equals(newMF)){
 			oldMF = newMF;
 			if(rs.getString("MFI_TRAN").equals("BUY")){
-				buyMF = buyMF + rs.getDouble("MFI_TRAN_QTY");
-				buyMFVal = buyMFVal + rs.getDouble("MFI_AMT");
+				buyMF = buyMF + rs.getFloat("MFI_TRAN_QTY");
+				buyMFVal = buyMFVal + rs.getFloat("MFI_AMT");
 			}else{
-				sellMF = sellMF + rs.getDouble("MFI_TRAN_QTY");
-				sellMFVal = sellMFVal + rs.getDouble("MFI_AMT");
+				sellMF = sellMF + rs.getFloat("MFI_TRAN_QTY");
+				sellMFVal = sellMFVal + rs.getFloat("MFI_AMT");
 			}
 			%>
 			<tr>
 			<td><%=rs.getString("MFI_MF_NAME") %></td>
 			<td><%=rs.getDate("MFI_TRAN_DATE") %></td>
 			<td><%=rs.getString("MFI_TRAN") %></td>
-			<td><%=rs.getDouble("MFI_AMT") %></td>
-			<td><%=rs.getDouble("MFI_PUB_NAV") %></td>
-			<td><%=rs.getDouble("MFI_TRAN_NAV") %></td>
-			<td><%=rs.getDouble("MFI_TRAN_QTY") %></td>
-			<td><%=rs.getDouble("MFI_BAL_QTY") %></td>
+			<td><%=rs.getFloat("MFI_AMT") %></td>
+			<td><%=rs.getFloat("MFI_PUB_NAV") %></td>
+			<td><%=rs.getFloat("MFI_TRAN_NAV") %></td>
+			<td><%=rs.getFloat("MFI_TRAN_QTY") %></td>
+			<td><%=rs.getFloat("MFI_BAL_QTY") %></td>
 			</tr>
 			<%
 		}else{
@@ -114,28 +114,28 @@ while(rs.next()){
 			<%
 			oldMF = newMF;
 			
-			buyMF =0.0;
-			buyMFVal =0.0;
-			sellMF =0.0;
-			sellMFVal =0.0;
+			buyMF =0;
+			buyMFVal =0;
+			sellMF =0;
+			sellMFVal =0;
 			
 			if(rs.getString("MFI_TRAN").equals("BUY")){
-				buyMF = rs.getDouble("MFI_TRAN_QTY");
-				buyMFVal = rs.getDouble("MFI_AMT");
+				buyMF = rs.getFloat("MFI_TRAN_QTY");
+				buyMFVal = rs.getFloat("MFI_AMT");
 			}else{
-				sellMF = rs.getDouble("MFI_TRAN_QTY");
-				sellMFVal = rs.getDouble("MFI_AMT");
+				sellMF = rs.getFloat("MFI_TRAN_QTY");
+				sellMFVal = rs.getFloat("MFI_AMT");
 			}
 			%>
 			<tr>
 			<td><%=rs.getString("MFI_MF_NAME") %></td>
 			<td><%=rs.getDate("MFI_TRAN_DATE") %></td>
 			<td><%=rs.getString("MFI_TRAN") %></td>
-			<td><%=rs.getDouble("MFI_AMT") %></td>
-			<td><%=rs.getDouble("MFI_PUB_NAV") %></td>
-			<td><%=rs.getDouble("MFI_TRAN_NAV") %></td>
-			<td><%=rs.getDouble("MFI_TRAN_QTY") %></td>
-			<td><%=rs.getDouble("MFI_BAL_QTY") %></td>
+			<td><%=rs.getFloat("MFI_AMT") %></td>
+			<td><%=rs.getFloat("MFI_PUB_NAV") %></td>
+			<td><%=rs.getFloat("MFI_TRAN_NAV") %></td>
+			<td><%=rs.getFloat("MFI_TRAN_QTY") %></td>
+			<td><%=rs.getFloat("MFI_BAL_QTY") %></td>
 			</tr>
 			<%
 

@@ -16,10 +16,10 @@
 <%
 Connection conn = null;
 Statement statement = null;
-double oldDep =0.0;
-double oldWith =0.0;
-double newDep =0.0;
-double newWith =0.0;
+float oldDep =0;
+float oldWith =0;
+float newDep =0;
+float newWith =0;
 boolean firstRec = true;
 int oldMonth = 0;
 int newMonth = 0;
@@ -49,31 +49,31 @@ while(rs.next()){
 	
 	if(firstRec){
 		firstRec = false;
-		oldDep = rs.getDouble("FBD_DEPOSIT");
-		oldWith = rs.getDouble("FBD_WITH");
+		oldDep = rs.getFloat("FBD_DEPOSIT");
+		oldWith = rs.getFloat("FBD_WITH");
 		oldMonth = rs.getDate("FBD_DATE").getMonth(); 
 		%>
 		<tr>
 		<td><%=rs.getDate("FBD_DATE") %></td>
 		<td><%=rs.getString("FBD_DESC") %></td>
-		<td><%=rs.getDouble("FBD_DEPOSIT") %></td>
-		<td><%=rs.getDouble("FBD_WITH") %></td>
-		<td><%=rs.getDouble("FBD_BAL") %></td>
+		<td><%=rs.getFloat("FBD_DEPOSIT") %></td>
+		<td><%=rs.getFloat("FBD_WITH") %></td>
+		<td><%=rs.getFloat("FBD_BAL") %></td>
 		</tr>
 		<%
 	}else{
 		newMonth = rs.getDate("FBD_DATE").getMonth();
 		if(oldMonth==newMonth){
-			oldDep = oldDep+rs.getDouble("FBD_DEPOSIT");
-			oldWith = oldWith+rs.getDouble("FBD_WITH");
+			oldDep = oldDep+rs.getFloat("FBD_DEPOSIT");
+			oldWith = oldWith+rs.getFloat("FBD_WITH");
 			//oldMonth = rs.getDate("FBD_DATE").getMonth(); 
 			%>
 			<tr>
 			<td><%=rs.getDate("FBD_DATE") %></td>
 			<td><%=rs.getString("FBD_DESC") %></td>
-			<td><%=rs.getDouble("FBD_DEPOSIT") %></td>
-			<td><%=rs.getDouble("FBD_WITH") %></td>
-			<td><%=rs.getDouble("FBD_BAL") %></td>
+			<td><%=rs.getFloat("FBD_DEPOSIT") %></td>
+			<td><%=rs.getFloat("FBD_WITH") %></td>
+			<td><%=rs.getFloat("FBD_BAL") %></td>
 			</tr>
 			<%
 		}else{
@@ -86,16 +86,16 @@ while(rs.next()){
 			<th></th>
 			</tr>
 			<%
-			oldDep = rs.getDouble("FBD_DEPOSIT");
-			oldWith = rs.getDouble("FBD_WITH");
+			oldDep = rs.getFloat("FBD_DEPOSIT");
+			oldWith = rs.getFloat("FBD_WITH");
 			oldMonth = rs.getDate("FBD_DATE").getMonth(); 
 			%>
 			<tr>
 			<td><%=rs.getDate("FBD_DATE") %></td>
 			<td><%=rs.getString("FBD_DESC") %></td>
-			<td><%=rs.getDouble("FBD_DEPOSIT") %></td>
-			<td><%=rs.getDouble("FBD_WITH") %></td>
-			<td><%=rs.getDouble("FBD_BAL") %></td>
+			<td><%=rs.getFloat("FBD_DEPOSIT") %></td>
+			<td><%=rs.getFloat("FBD_WITH") %></td>
+			<td><%=rs.getFloat("FBD_BAL") %></td>
 			</tr>
 			<%
 
