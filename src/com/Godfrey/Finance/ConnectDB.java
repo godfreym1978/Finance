@@ -6,11 +6,20 @@ import java.sql.SQLException;
 
 public class ConnectDB {
 
+	/* For Oracle */
 	private static final String DB_DRIVER = "oracle.jdbc.driver.OracleDriver";
 	private static final String DB_CONNECTION = "jdbc:oracle:thin:@localhost:1521:XE";
 	private static final String DB_USER = "system";
 	private static final String DB_PASSWORD = "passw9rd";
+	
 
+	/* For mysql 
+	private static final String DB_DRIVER = "com.mysql.jdbc.Driver";
+	private static final String DB_CONNECTION = "jdbc:mysql://localhost:3306/finance?useSSL=false";
+	private static final String DB_USER = "root";
+	private static final String DB_PASSWORD = "passw3rd";
+	*/
+	
 	public Connection getDBConnection() {
 
 		Connection dbConnection = null;
