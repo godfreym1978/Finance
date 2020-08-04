@@ -10,7 +10,7 @@ public class ConnectDB {
 	private static final String DB_DRIVER = "oracle.jdbc.driver.OracleDriver";
 	private static final String DB_CONNECTION = "jdbc:oracle:thin:@localhost:1521:XE";
 	private static final String DB_USER = "system";
-	private static final String DB_PASSWORD = "passw9rd";
+	private static final String DB_PASSWORD = "passw1rd";
 	
 
 	/* For mysql 
