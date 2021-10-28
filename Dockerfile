@@ -4,10 +4,10 @@ RUN git clone https://github.com/godfreym1978/Finance.git
 
 FROM maven:3.5-jdk-8-alpine as build
 WORKDIR /app
-COPY –from=clone /app/Finance /app
+COPY –-from=clone /app/Finance /app
 RUN mvn clean install package
 
 FROM tomcat:8-jre8-alpine
 #WORKDIR /app
-COPY –from=build /app/webapp/target/*.war $CATALINA_HOME/webapps/Finance.war
+COPY --from=build /app/webapp/target/*.war $CATALINA_HOME/webapps/Finance.war
 EXPOSE 8080
