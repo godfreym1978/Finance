@@ -9,5 +9,5 @@ RUN mvn clean install package
 
 FROM tomcat:8-jre8-alpine
 #WORKDIR /app
-COPY –from=build /app/webapp/target/webapp.war $CATALINA_HOME/webapps
+COPY –from=build /app/webapp/target/*.war $CATALINA_HOME/webapps/Finance.war
 EXPOSE 8080
