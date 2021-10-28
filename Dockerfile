@@ -1,13 +1,7 @@
-FROM alpine/git as clone
-WORKDIR /app
-RUN git clone https://github.com/godfreym1978/Finance.git
+FROM maven:3.6.3-openjdk-8 as buildprobe
+RUN git clone https://github.com/godfreym1978/Finance && cd Finance
+WORKDIR /Finance
+RUN mvn package && ls -l /Finance && ls -l /Finance/target
 
-FROM maven:3.5-jdk-8-alpine as build
-WORKDIR /app
-COPY –-from=clone /app/Finance /app
-RUN mvn clean install package
-
-FROM tomcat:8-jre8-alpine
-#WORKDIR /app
-COPY --from=build /app/webapp/target/*.war $CATALINA_HOME/webapps/Finance.war
-EXPOSE 8080
+FROM tomcat:9.0.21-jdk8-openjdk
+COPY --from=buildprobe /Finance/target/*.war /usr/local/tomcat/webapps/Finance.war
